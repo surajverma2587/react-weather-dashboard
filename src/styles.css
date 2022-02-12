@@ -1,0 +1,15 @@
+.border {
+  border: 1px solid gray;
+}
+
+.aside-item {
+  padding: 20px;
+}
+
+.recent-search-item {
+  padding: 20px 0px !important;
+}
+
+.banner-item {
+  padding: 20px 5px;
+}
