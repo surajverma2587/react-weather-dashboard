@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import classNames from "classnames";
 import axios from "axios";
 
 import "../../styles.css";
+import { AppContext } from "../../App";
 
 const API_KEY = "393609ac7b2e5f25ccdd00e626ee13dd";
 
 export const SearchForm = () => {
+  const { searchTerm, setSearchTerm, setCities, cities, setWeatherData } =
+    useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const [inputValue, setInputValue] = useState("");
 
   useEffect(async () => {
@@ -19,7 +21,18 @@ export const SearchForm = () => {
 
       const { data } = await axios.get(url);
 
-      console.log(data);
+      setWeatherData(data);
+
+      const citiesFromLS = JSON.parse(localStorage.getItem("cities")) || [];
+
+      if (!citiesFromLS.includes(searchTerm)) {
+        citiesFromLS.push(searchTerm);
+        localStorage.setItem("cities", JSON.stringify(citiesFromLS));
+        setCities([...cities, searchTerm]);
+      }
+
+      setSearchTerm("");
+      setInputValue("");
       setIsLoading(false);
     }
   }, [searchTerm]);

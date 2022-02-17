@@ -13,7 +13,7 @@ export const Banner = () => {
           computer={12}
           className="banner-item"
         >
-          <Header as="h1">First Header</Header>
+          <Header as="h1">Weather Dashboard</Header>
         </Grid.Column>
         <Grid.Column
           className="banner-item"
